@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/kavinek/ViewComponentExample.git'
+            }
+        }
+
+        stage('Restore') {
+            steps {
+                bat 'cd ViewComponentExample && dotnet restore'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'cd ViewComponentExample && dotnet build --configuration Release'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'cd ViewComponentExample && dotnet test'
+            }
+        }
+
+        stage('Publish') {
+            steps {
+                bat 'cd ViewComponentExample && dotnet publish -c Release -o out'
+            }
+        }
+    }
+}
