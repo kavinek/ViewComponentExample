@@ -4,31 +4,31 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/kavinek/ViewComponentExample'
+                git 'https://github.com/kavinek/ViewComponentExample.git'
             }
         }
 
         stage('Restore') {
             steps {
-                bat 'dotnet restore'
+                bat 'cd ViewComponentExample && dotnet restore'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'dotnet build --configuration Release'
+                bat 'cd ViewComponentExample && dotnet build --configuration Release'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'dotnet test'
+                bat 'cd ViewComponentExample && dotnet test'
             }
         }
 
         stage('Publish') {
             steps {
-                bat 'dotnet publish -c Release -o out'
+                bat 'cd ViewComponentExample && dotnet publish -c Release -o out'
             }
         }
     }
